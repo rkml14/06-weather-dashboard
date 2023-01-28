@@ -11,17 +11,56 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 
     <title>Weather Dashboard</title>
-
-
-
-
 </head>
 
 
+<!--Header of the page-->
+<header class="dashboard-header">
+    <div class="container text-center">
+        <h1>Weather Dashboard</h1>
+    </div>
+</header>
 
-
+<!--Body of the page-->
 
 <body>
+
+    <!--read up on cards in bootstrap.  may look nicer  -->
+    <section class=".container">
+        <div class="row">
+            <aside class="col-lg-3">  
+                <h4>Enter a City Name:</h4>
+                <form class="" id="city-Search">
+                    <input class="form-control sm-2" id="city-input" type="search" aria-label="Search">
+                    <button type="button" class="btn btn-primary" type="submit" id="form-submit">SEARCH</button>
+                </form>
+            </aside>
+        </div>
+
+        <!-- Section to output for the current weather.  Needs to not show at first. work on this-->
+        <section class="col-lg-9" id="current-weather">
+            <div class="card">
+                <h1 id="city"></h1>
+                <h5 id="date"></h5>
+                <p id="temp"></p>
+                <p id="humidity"></p>
+                <p id="wind"></p>
+            </div>
+        </section>
+
+        <section id="five-day">
+            <h3>5-Day Forecast</h3>
+
+        </section>
+
+
+
+
+
+    </section>
+
+
+
 
 
 
