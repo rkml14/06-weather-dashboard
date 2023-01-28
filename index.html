@@ -26,44 +26,40 @@
 <body>
 
     <!--read up on cards in bootstrap.  may look nicer  -->
-    <section class=".container">
-        <div class="row">
-            <aside class="col-lg-3">  
-                <h4>Enter a City Name:</h4>
-                <form class="" id="city-Search">
-                    <input class="form-control sm-2" id="city-input" type="search" aria-label="Search">
-                    <button type="button" class="btn btn-primary" type="submit" id="form-submit">SEARCH</button>
-                </form>
-            </aside>
-        </div>
+    <main class="flex-row justify-space-between">
 
-        <!-- Section to output for the current weather.  Needs to not show at first. work on this-->
-        <section class="col-lg-9" id="current-weather">
-            <div class="card">
-                <h1 id="city"></h1>
-                <h5 id="date"></h5>
-                <p id="temp"></p>
-                <p id="humidity"></p>
-                <p id="wind"></p>
+
+        <section class=".container">
+            <div class="row">
+                <aside class="col-lg-3">
+                    <h4>Enter a City Name:</h4>
+                    <form class="card-body" id="city-Search">
+                        <input class="form-control sm-2" id="city-input" type="search" aria-label="Search">
+                        <button type="button" class="btn btn-primary" type="submit" id="form-submit">SEARCH</button>
+                    </form>
+                </aside>
             </div>
+
+            <!-- Section to output for the current weather. Needs to not show at first. work on this -->
+            <section class="col-lg-9" id="current-weather">
+                <div class="card">
+                    <h1 id="city"></h1>
+                    <h5 id="date"></h5>
+                    <p id="temp"></p>
+                    <p id="humidity"></p>
+                    <p id="wind"></p>
+                </div>
+            </section>
+
+            <section id="five-day">
+                <h3>5-Day Forecast</h3>
+                    <div class="card"></div>
+<!-- need to figure out how to show this-->
+            </section>
+
         </section>
 
-        <section id="five-day">
-            <h3>5-Day Forecast</h3>
-
-        </section>
-
-
-
-
-
-    </section>
-
-
-
-
-
-
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
         integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
@@ -76,6 +72,7 @@
         crossorigin="anonymous"></script>
 
     <script src="./assets/js/script.js"></script>
+
 </body>
 
 </html>
