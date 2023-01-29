@@ -43,13 +43,13 @@ function currentWeather() {
         .then(function (response) {
             return response.json();
         })
-        .then(function (data) {
-            console.log(data)
+        .then(function (response) {
+            console.log(response)
         })
         .then(function (response) {
             // get city's longitude and latitude
-            var cityLon = response.coord.lon;
-            var cityLat = response.coord.lat;
+            let cityLon = response.coord.lon;
+            let cityLat = response.coord.lat;
         })
 };
 
