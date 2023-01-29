@@ -37,8 +37,9 @@ $("#city-form").on("submit", function (event) {   //id from form html
     }
 });
 
+//fetch is working for currentWeather.  Need to extract data for current day
 function currentWeather() {
-    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&appid=" + apiKey;
+    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&limit=1&units=metric&appid=" + apiKey;
     fetch(queryURL)
         .then(function (res) {
             return res.json();
@@ -50,107 +51,17 @@ function currentWeather() {
             console.log("lat", lat)
             console.log("lon", lon)
         })
-       
+
 };
 
-
+//Function to get the 5 day forecast, using the lat & lon from the currentWeather function above
 function fiveDayForecast() {
-
-
-
+    let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
+    fetch(forecastURL)
+        .then(function (response){
+            return response.json();
+        })
+        .then(function(response) {
+            console.log(response);
+        });
 }
-
-// let currentWeather = function (cityInputEl) {
-//     // get and use data from open weather current weather api end point
-//     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
-//         // get response and turn it into objects
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (response) {
-//             // get city's longitude and latitude
-//             var cityLon = response.coord.lon;
-//             var cityLat = response.coord.lat;
-
-//             fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`)
-//                 // get response from one call api and turn it into objects
-//                 .then(function (response) {
-//                     return response.json();
-//                 })
-//             });
-// };
-
-
-
-
-
-
-// function currentWeather() {
-//     let apiUrl = 'http://api.openweathermap.org/geo/1.0/reverse?lat=51.5098&lon=-0.1180&limit=5&appid=304b8acf30a32bcf0df086074838b6ea'
-//     fetch(apiUrl)
-//         .then(function (response) {
-//             return response.json();
-//             })
-//              .then(function(data) {
-//             console.log("Console log to check apiURL: " + data)
-//         })
-//     }
-// currentWeather();
-
-
-
-//trying to fetch 5 day- but only works with test city.  trying to do none test city
-
-
-// fetch(fiveDay)
-//     .then(function (response) {
-//         return response.json();
-//     })
-//     .then(function (data) {
-//         console.log(data)
-//     })
-//     .then(function (response) {
-//         // get city's longitude and latitude
-//         let lat= response.lon;
-//         let lon = response.lat;
-//     })
-
-// function currentWeather() {
-//     let apiUrl = 'http://api.openweathermap.org/geo/1.0/reverse?lat=51.5098&lon=-0.1180&limit=5&appid=304b8acf30a32bcf0df086074838b6ea'
-//     fetch(apiUrl)
-//         .then(function (response) {
-//             return response.json();
-//             })
-//              .then(function(data) {
-//             console.log("Console log to check apiURL: " + data)
-//         })
-//     }
-// currentWeather();
-
-
-// // function to find the current weather using latitude and longitude
-
-
-
-
-
-
-
-// var formSubmitCity = function (event) {
-//   event.preventDefault();
-
-//   var username = nameInputEl.value.trim();
-
-  // if (username) {
-  //   getUserRepos(username);
-
-  //   repoContainerEl.textContent = '';
-  //   nameInputEl.value = '';
-  // } else {
-  //   alert('Please enter a GitHub username');
-  // }
-// };
-
-// cityForm.addEventListener('submit', formSubmitCity);  //call the function for the button
-
-

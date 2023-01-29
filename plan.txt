@@ -1,14 +1,17 @@
 
-i need a function for lon and lang
-i need a function for city
+
+i need a function for city - i have this, it puts the information into lat-lon function
+i need a function for lon and lang  - HAVE THIS.  Also contains current weather that I need to display
+
+I need a function for 5 day forecast 
 
 
-Input field for user to enter city & submit button
-    need to use to find current weather conditions 
+Input field for user to enter city & submit button  - this works
+    need to use to find current weather conditions   - need to output this information
 
 take that city and convert to lon & lan  for both the 5 day & current weather
 
-need to output the current weather with the following  
+need to output the current weather with the following  - STILL NEED TO DO
     -ciy name
     -date
     -icon representation of weather conditions
