@@ -33,8 +33,6 @@ $("#city-form").on("submit", function (event) {   //id from form html
     }
     else {
         currentWeather(cityInputEl);  //this fetch is working
-        fiveDayForecast();  //should this be lat,lon instead?  no, doesn't work  maybe nothing? that did something
-        // fivedaytest();  trying to see how this should work
     }
 });
 
@@ -51,12 +49,15 @@ function currentWeather() {
             lon = res.coord.lon;
             console.log("lat", lat)
             console.log("lon", lon)
+            fiveDayForecast();    
+            //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
         })
 
 };
 
 //Function to get the 5 day forecast, using the lat & lon from the currentWeather function above
 function fiveDayForecast() {
+    console.log(lat,lon);
     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
     fetch(forecastURL)
         .then(function (response) {
@@ -66,15 +67,3 @@ function fiveDayForecast() {
             console.log(response);
         });
 }
-
-
-// function fivedaytest() {
-//     let testquery = "https://api.openweathermap.org/data/2.5/forecast?q=London,uk&callback=test&appid=" + apiKey;
-//     fetch(testquery)
-//         .then(function (test) {
-//         return test.json();
-//         })
-//         .then(function (test) {
-//             console.log(test);
-//         });
-// }
