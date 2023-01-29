@@ -1,4 +1,6 @@
 //Global variables
+
+//from the form
 let cityFormEl = $('#city-form');
 let cityInputEl = $('#city-input');
 
@@ -7,15 +9,17 @@ const date = document.querySelector('date');
 const temp = document.querySelector('temp');
 const humidity = document.querySelector('humidity');
 const wind = document.querySelector('wind');
-const testCity = "Toronto";
-const testCity2 = "Paris";
+
+
 
 let apiKey = "304b8acf30a32bcf0df086074838b6ea";
-// let fiveDay = "http://api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&limit=1&&units=metric&appid=" + apiKey;
-let currentDay = ""
 let lat;
 let lon;
 
+//for testing purposes 
+const testCity = "Toronto";
+const testCity2 = "Paris";
+let currentDay = ""
 
 
 // To save the user's inputed city name for the currentWeather fetch
