@@ -18,7 +18,7 @@ let lon
 
 
 
-// Being called when city is submitted 
+// To save the user's inputed city name for the currentWeather fetch
 $("#city-form").on("submit", function (event) {   //id from form html
     event.preventDefault();
 
@@ -46,7 +46,12 @@ function currentWeather() {
         .then(function (data) {
             console.log(data)
         })
-}
+        .then(function (response) {
+            // get city's longitude and latitude
+            var cityLon = response.coord.lon;
+            var cityLat = response.coord.lat;
+        })
+};
 
 
 
@@ -90,7 +95,7 @@ function currentWeather() {
 
 
 
-//trying to fetch 5 day- but only works with test city.  trying to do none test city 
+//trying to fetch 5 day- but only works with test city.  trying to do none test city
 
 
 // fetch(fiveDay)
