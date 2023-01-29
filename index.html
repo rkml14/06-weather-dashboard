@@ -13,17 +13,18 @@
     <title>Weather Dashboard</title>
 </head>
 
+<body class="body">
 
-<!--Header of the page-->
-<header class="dashboard-header">
-    <div class="container text-center">
-        <h1>Weather Dashboard</h1>
-    </div>
-</header>
+    <!--Header of the page-->
+    <header class="header">
+        <div class="container text-center">
+            <h1>Weather Dashboard</h1>
+        </div>
+    </header>
 
-<!--Body of the page-->
+    <!--Body of the page-->
 
-<body>
+
 
     <!--read up on cards in bootstrap.  may look nicer  -->
     <main class="flex-row justify-space-between">
@@ -33,13 +34,15 @@
             <div class="row">
                 <aside class="col-lg-3">
                     <h4>Enter a City Name:</h4>
-                    <form class="card-body" id="city-Search">
-                        <input class="form-control sm-2" id="city-input" type="search" aria-label="Search">
+                    <form class="card-body" id="city-name">
+                        <input class="form-control sm-2" id="city-input" type="search">
                         <button type="button" class="btn btn-primary" type="submit" id="form-submit">SEARCH</button>
                     </form>
                 </aside>
             </div>
 
+
+          
             <!-- Section to output for the current weather. Needs to not show at first. work on this -->
             <section class="col-lg-9" id="current-weather">
                 <div class="card">
@@ -53,8 +56,8 @@
 
             <section id="five-day">
                 <h3>5-Day Forecast</h3>
-                    <div class="card"></div>
-<!-- need to figure out how to show this-->
+                <div class="card"></div>
+                <!-- need to figure out how to show this-->
             </section>
 
         </section>
