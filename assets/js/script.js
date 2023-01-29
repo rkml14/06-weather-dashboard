@@ -13,8 +13,8 @@ const testCity2 = "Paris";
 let apiKey = "304b8acf30a32bcf0df086074838b6ea";
 // let fiveDay = "http://api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&limit=1&&units=metric&appid=" + apiKey;
 let currentDay = ""
-let lat
-let lon
+let lat;
+let lon;
 
 
 
@@ -38,23 +38,27 @@ $("#city-form").on("submit", function (event) {   //id from form html
 });
 
 function currentWeather() {
-    let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&limit=1&&units=metric&appid=" + apiKey;
+    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&appid=" + apiKey;
     fetch(queryURL)
-        .then(function (response) {
-            return response.json();
+        .then(function (res) {
+            return res.json();
         })
-        .then(function (response) {
-            console.log(response)
+        .then(function (res) {
+            console.log(res)
+            lat = res.coord.lat;
+            lon = res.coord.lon;
+            console.log("lat", lat)
+            console.log("lon", lon)
         })
-        .then(function (response) {
-            // get city's longitude and latitude
-            let cityLon = response.coord.lon;
-            let cityLat = response.coord.lat;
-        })
+       
 };
 
 
+function fiveDayForecast() {
 
+
+
+}
 
 // let currentWeather = function (cityInputEl) {
 //     // get and use data from open weather current weather api end point
