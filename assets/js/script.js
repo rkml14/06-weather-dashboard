@@ -33,7 +33,7 @@ $("#city-form").on("submit", function (event) {   //id from form html
     }
     else {
         currentWeather(cityInputEl);  //need to build these functions
-        // fiveDayForecast(cityInputEl);  //need to build these functions 
+        fiveDayForecast(cityInputEl);  //need to build these functions 
     }
 });
 
