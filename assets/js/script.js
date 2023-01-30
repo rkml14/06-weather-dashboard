@@ -13,7 +13,7 @@ let cityInputEl = $('#city-input');
 
 let cityForecastEl = $('#city-forecast');
 let displayForecastEl = $('#display-forecast');
-let forecastCardEl = $('#forecast-card');
+let forecastCardEl = $(".forecast-card");
 
 
 
@@ -123,7 +123,9 @@ function fiveDayForecast() {
                 let fiveHum = $("<p>");
                 let fiveImg = $("<img>");
                 let fiveDate = $("<h6>");  //need to do a dayjs for this
-
+                fiveTemp.text("Temp:"+foreTemp)
+                fiveHum.text("Humidity: "+foreHumidity)
+                fiveDate.text("Date: " +response.list[i].dt_txt)
                 let today = dayjs();
                 $('#date').text(today.format('MMM D, YYYY'));
 
@@ -140,7 +142,7 @@ function fiveDayForecast() {
 
                 // fiveDay.append();
 
-                testingFunction()
+                // testingFunction()
             }
         });
 }
