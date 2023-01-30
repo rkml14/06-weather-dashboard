@@ -37,3 +37,14 @@ need to save the above to local storage as a button for user to reference again 
 
 
 things to do: figure out the fetch functions.  I don't understand how to do the geo locate openweathermap
+
+
+function Forecast(day, temp, conditions) {
+ this.day = day;
+ this.temperature = temp;
+ this.conditions = conditions;
+}
+
+let forecasts = forecastData.map((data) => {
+ return new Forecast(...data);
+}

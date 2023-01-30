@@ -103,6 +103,18 @@ function fiveDayForecast() {
         })
         .then(function (response) {
             console.log(response);
+
+            
+
+
+
+           
+
+
+
+
+
+
         });
 
 
