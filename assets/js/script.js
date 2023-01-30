@@ -100,7 +100,7 @@ function fiveDayForecast() {
             //trying to hide the display-forecast section HTML & have it reappear
             // displayForecastEl.classList.remove("hide");
 
-            for (var i = 4; i < response.list.length; i += 8) {
+            for (var i = 6; i < response.list.length; i += 8) {
                 //Declaring and initiliazing the variables values from the above json response
                 foreIcon = response.list[i].weather[0].icon;
                 foreIconURL = "http://openweathermap.org/img/w/" + foreIcon + ".png";
@@ -117,7 +117,7 @@ function fiveDayForecast() {
                 console.log("wind", foreWind);
                 console.log("wind km", forewindKM);
 
-
+                
                 let fiveDay = $("<div class='card text-white bg-primary p-2'>")
                 let fiveTemp = $("<p>");
                 let fiveHum = $("<p>");
@@ -129,16 +129,18 @@ function fiveDayForecast() {
 
                 fiveImg.addClass("img-fluid");
                 fiveImg.attr("src", "https://openweathermap.org/img/wn/" + foreIcon + ".png")
-               
+
                 fiveDay.append(fiveDate);
                 fiveDay.append(fiveImg);
                 fiveDay.append(fiveTemp)
                 fiveDay.append(fiveHum);
+                forecastCardEl.append(fiveDay);
+
                 
 
                 // fiveDay.append();
-               
 
+                testingFunction()
             }
         });
 }
@@ -150,18 +152,20 @@ function fiveDayForecast() {
 
 
 
-// //Function to get the 5 day forecast, using the lat & lon from the currentWeather function above
-// // function testingFunction() {
-// //     console.log(lat, lon);
-// //     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
-// //     fetch(forecastURL)
-// //         .then(function (response) {
-// //             return response.json();
-// //         })
-// //         .then(function (response) {
-// //             for (var i = 4; i < response.list.length; i += 8){
-// //                 console.log('hello')
-// //             console.log(response.list[i].dt_txt);}
-// //         });
+//Function to get the 5 day forecast, using the lat & lon from the currentWeather function above
+function testingFunction() {
+    console.log(lat, lon);
+    let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
+    fetch(forecastURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            console.log(response);
+            for (var i = 4; i < response.list.length; i += 8) {
+                console.log('hello')
+                console.log(response.list[i].dt_txt);
+            }
+        });
 
-// // }
+}
