@@ -39,7 +39,7 @@ $("#city-form").on("submit", function (event) {   //id from form html
     }
 });
 
-//fetch is working for currentWeather.  Need to extract data for current day
+//Fetch is working for currentWeather to extract data for current day
 function currentWeather() {
     let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&limit=1&units=metric&appid=" + apiKey;
     fetch(queryURL)
@@ -103,31 +103,24 @@ function fiveDayForecast() {
         })
         .then(function (response) {
             console.log(response);
-
-            
-
-
-
-           
-
-
-
-
-
-
         });
-
-
-
-
-
-
-
-
-
-
-
-
+testingFunction();
 }
 
 
+
+
+    function testingFunction() {
+        console.log(lat, lon);
+        let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
+        fetch(forecastURL)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (response) {
+                for (var i = 0; i < response.length; i += 8) {
+                    console.log(response.list.dt_text[i]);
+                }
+            });
+    }
+    
