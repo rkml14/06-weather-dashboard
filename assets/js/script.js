@@ -49,7 +49,7 @@ function currentWeather() {
         .then(function (res) {
             console.log(res)
 
-            //Declaring the variables values from the above json response
+            //Declaring and initiliazing the variables values from the above json response
             lat = res.coord.lat;
             lon = res.coord.lon;
             icon = res.weather[0].icon;
@@ -83,9 +83,8 @@ function currentWeather() {
             document.getElementById("humidity").innerHTML = "Humidity: " + humidity + "%";
 
             //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
-            // fiveDayForecast();
-            testingFunction()
-        })
+            fiveDayForecast();
+            })
 };
 
 
@@ -95,35 +94,46 @@ function currentWeather() {
 
 
 //Function to get the 5 day forecast, using the lat & lon from the currentWeather function above
+// function testingFunction() {
+//     console.log(lat, lon);
+//     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
+//     fetch(forecastURL)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (response) {
+//             console.log(response);
+//             testingFunction();
+//         });
+
+// }
+
+
+
+//Function for the 5 day forecast, creates cards to append to the page
 function fiveDayForecast() {
-    console.log(lat, lon);
     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
     fetch(forecastURL)
         .then(function (response) {
             return response.json();
         })
         .then(function (response) {
-            console.log(response);
-            testingFunction();
+            for (var i = 4; i < response.list.length; i += 8) {
+                //Declaring and initiliazing the variables values from the above json response
+                foreIcon = response.list[i].weather[0].icon;
+                foreIconURL = "http://openweathermap.org/img/w/" + foreIcon + ".png";
+                foreTemp = response.list[i].main.temp;
+                foreHumidity = response.list[i].main.humidity;
+                foreWind = response.list[i].wind.speed;
+                forewindKM = Math.floor((foreWind) * 3.6);
+                //To confirm that the right information has been logged
+                console.log("icon", foreIconURL);
+                console.log("temp", foreTemp);
+                console.log("humidity", foreHumidity);
+                console.log("wind", foreWind);
+                console.log("wind km", forewindKM);
+            }
         });
-
 }
 
-
-
-
-    function testingFunction() {
-        let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
-        fetch(forecastURL)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (response) {
-                for (var i = 4; i < response.list.length; i += 8) {
-                    console.log('hello')
-                    console.log(response.list[i].dt_txt);
-                }
-            });
-    }
-    
 
