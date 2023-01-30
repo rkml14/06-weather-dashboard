@@ -50,7 +50,7 @@ function currentWeather() {
             lon = res.coord.lon;
             icon = res.weather[0].icon;
             iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
-            temp = res.main.temp;
+            temp = Math.floor(res.main.temp);
             humidity = res.main.humidity;
             wind = res.wind.speed;
             //To confirm that the right information has been logged
@@ -98,13 +98,13 @@ function fiveDayForecast() {
         })
         .then(function (response) {
             //trying to hide the display-forecast section HTML & have it reappear
-            displayForecastEl.classList.remove("hide");
+            // displayForecastEl.classList.remove("hide");
 
             for (var i = 4; i < response.list.length; i += 8) {
                 //Declaring and initiliazing the variables values from the above json response
                 foreIcon = response.list[i].weather[0].icon;
                 foreIconURL = "http://openweathermap.org/img/w/" + foreIcon + ".png";
-                foreTemp = response.list[i].main.temp;
+                foreTemp = Math.floor(response.list[i].main.temp);
                 foreHumidity = response.list[i].main.humidity;
                 foreWind = response.list[i].wind.speed;
                 forewindKM = Math.floor((foreWind) * 3.6);
@@ -129,12 +129,15 @@ function fiveDayForecast() {
 
                 fiveImg.addClass("img-fluid");
                 fiveImg.attr("src", "https://openweathermap.org/img/wn/" + foreIcon + ".png")
+               
+                fiveDay.append(fiveDate);
                 fiveDay.append(fiveImg);
+                fiveDay.append(fiveTemp)
+                fiveDay.append(fiveHum);
                 
 
-
-                fiveDay.append();
-
+                // fiveDay.append();
+               
 
             }
         });
@@ -144,52 +147,21 @@ function fiveDayForecast() {
 
 
 
-var dailyDiv = $("<div class='card text-white bg-primary p-2'>")
-var pTemp = $("<p>");
-var pHum = $("<p>");
-var imgIcon = $("<img>");
-var hDate = $("<h6>");
-
-//adds text and attributes to the dynamic elements
-hDate.text(dailyDate);
-imgIcon.attr("src", "https://openweathermap.org/img/wn/" + dailyIcon + "@2x.png")
-imgIcon.addClass("img-fluid");
-imgIcon.css({ "width": "100%" });
-pTemp.text("Temp: " + dailyTemp + "° F");
-pHum.text("Humidity: " + dailyHum + "%");
-
-//appends the dynamic elements to the html
-dailyDiv.append(hDate);
-dailyDiv.append(imgIcon);
-dailyDiv.append(pTemp);
-dailyDiv.append(pHum);
-$(".card-deck").append(dailyDiv);
-
-$(".card-deck").empty();
 
 
 
+// //Function to get the 5 day forecast, using the lat & lon from the currentWeather function above
+// // function testingFunction() {
+// //     console.log(lat, lon);
+// //     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
+// //     fetch(forecastURL)
+// //         .then(function (response) {
+// //             return response.json();
+// //         })
+// //         .then(function (response) {
+// //             for (var i = 4; i < response.list.length; i += 8){
+// //                 console.log('hello')
+// //             console.log(response.list[i].dt_txt);}
+// //         });
 
-
-
-
-// h1El.setAttribute("style", "margin:auto; width:50%; text-align:center;");
-
-
-
-
-//Function to get the 5 day forecast, using the lat & lon from the currentWeather function above
-// function testingFunction() {
-//     console.log(lat, lon);
-//     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
-//     fetch(forecastURL)
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (response) {
-//             for (var i = 4; i < response.list.length; i += 8){
-//                 console.log('hello')
-//             console.log(response.list[i].dt_txt);}
-//         });
-
-// }
+// // }
