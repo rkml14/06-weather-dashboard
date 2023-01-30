@@ -83,8 +83,8 @@ function currentWeather() {
             document.getElementById("humidity").innerHTML = "Humidity: " + humidity + "%";
 
             //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
-            fiveDayForecast();
-           
+            // fiveDayForecast();
+            testingFunction()
         })
 };
 
@@ -119,9 +119,11 @@ function fiveDayForecast() {
                 return response.json();
             })
             .then(function (response) {
-                for (var i = 4; i < response.length; i += 8) {
+                for (var i = 4; i < response.list.length; i += 8) {
+                    console.log('hello')
                     console.log(response.list[i].dt_txt);
                 }
             });
     }
     
+
