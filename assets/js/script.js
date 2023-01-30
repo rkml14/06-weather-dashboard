@@ -1,17 +1,4 @@
 //Global variables
-
-//from the form
-let cityFormEl = $('#city-form');
-let cityInputEl = $('#city-input');
-
-// const city = document.querySelector('city');
-// const date = document.querySelector('date');
-// const temp = document.querySelector('temp');
-// const humidity = document.querySelector('humidity');
-// const wind = document.querySelector('wind');
-
-
-
 let apiKey = "304b8acf30a32bcf0df086074838b6ea";
 let lat;
 let lon;
@@ -19,6 +6,15 @@ let icon;
 let temp;
 let humidity;
 let wind;
+
+//From the HTML
+let cityFormEl = $('#city-form');
+let cityInputEl = $('#city-input');
+
+let cityForecastEl = $('#city-forecast');
+let displayForecastEl = $('#display-forecast');
+let forecastCardEl = $('#forecast-card');
+
 
 
 // To save the user's inputed city name for the currentWeather fetch
@@ -74,7 +70,7 @@ function currentWeather() {
             // To get the Icon of the weather on the page
             let iconImg = $("<img>");
             iconImg.addClass("img-fluid");
-            iconImg.attr("src", "https://openweathermap.org/img/wn/" + icon + ".png")
+            iconImg.attr("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png")
             $("#city").append(iconImg);
 
             //to outpout the temp, humidity & wind to the page
@@ -84,8 +80,97 @@ function currentWeather() {
 
             //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
             fiveDayForecast();
-            })
+        })
 };
+
+
+//Function for the 5 day forecast, creates cards to append to the page
+function fiveDayForecast() {
+
+
+    let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
+
+
+
+    fetch(forecastURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            //trying to hide the display-forecast section HTML & have it reappear
+            displayForecastEl.classList.remove("hide");
+
+            for (var i = 4; i < response.list.length; i += 8) {
+                //Declaring and initiliazing the variables values from the above json response
+                foreIcon = response.list[i].weather[0].icon;
+                foreIconURL = "http://openweathermap.org/img/w/" + foreIcon + ".png";
+                foreTemp = response.list[i].main.temp;
+                foreHumidity = response.list[i].main.humidity;
+                foreWind = response.list[i].wind.speed;
+                forewindKM = Math.floor((foreWind) * 3.6);
+                //To confirm that the right information has been logged
+                console.log('for loop responses')
+                console.log(response.list[i].dt_txt);
+                console.log("icon", foreIconURL);
+                console.log("temp", foreTemp);
+                console.log("humidity", foreHumidity);
+                console.log("wind", foreWind);
+                console.log("wind km", forewindKM);
+
+
+                let fiveDay = $("<div class='card text-white bg-primary p-2'>")
+                let fiveTemp = $("<p>");
+                let fiveHum = $("<p>");
+                let fiveImg = $("<img>");
+                let fiveDate = $("<h6>");  //need to do a dayjs for this
+
+                let today = dayjs();
+                $('#date').text(today.format('MMM D, YYYY'));
+
+                fiveImg.addClass("img-fluid");
+                fiveImg.attr("src", "https://openweathermap.org/img/wn/" + foreIcon + ".png")
+                fiveDay.append(fiveImg);
+                
+
+
+                fiveDay.append();
+
+
+            }
+        });
+}
+
+
+
+
+
+var dailyDiv = $("<div class='card text-white bg-primary p-2'>")
+var pTemp = $("<p>");
+var pHum = $("<p>");
+var imgIcon = $("<img>");
+var hDate = $("<h6>");
+
+//adds text and attributes to the dynamic elements
+hDate.text(dailyDate);
+imgIcon.attr("src", "https://openweathermap.org/img/wn/" + dailyIcon + "@2x.png")
+imgIcon.addClass("img-fluid");
+imgIcon.css({ "width": "100%" });
+pTemp.text("Temp: " + dailyTemp + "° F");
+pHum.text("Humidity: " + dailyHum + "%");
+
+//appends the dynamic elements to the html
+dailyDiv.append(hDate);
+dailyDiv.append(imgIcon);
+dailyDiv.append(pTemp);
+dailyDiv.append(pHum);
+$(".card-deck").append(dailyDiv);
+
+$(".card-deck").empty();
+
+
+
+
+
 
 
 // h1El.setAttribute("style", "margin:auto; width:50%; text-align:center;");
@@ -102,38 +187,9 @@ function currentWeather() {
 //             return response.json();
 //         })
 //         .then(function (response) {
-//             console.log(response);
-//             testingFunction();
+//             for (var i = 4; i < response.list.length; i += 8){
+//                 console.log('hello')
+//             console.log(response.list[i].dt_txt);}
 //         });
 
 // }
-
-
-
-//Function for the 5 day forecast, creates cards to append to the page
-function fiveDayForecast() {
-    let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
-    fetch(forecastURL)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (response) {
-            for (var i = 4; i < response.list.length; i += 8) {
-                //Declaring and initiliazing the variables values from the above json response
-                foreIcon = response.list[i].weather[0].icon;
-                foreIconURL = "http://openweathermap.org/img/w/" + foreIcon + ".png";
-                foreTemp = response.list[i].main.temp;
-                foreHumidity = response.list[i].main.humidity;
-                foreWind = response.list[i].wind.speed;
-                forewindKM = Math.floor((foreWind) * 3.6);
-                //To confirm that the right information has been logged
-                console.log("icon", foreIconURL);
-                console.log("temp", foreTemp);
-                console.log("humidity", foreHumidity);
-                console.log("wind", foreWind);
-                console.log("wind km", forewindKM);
-            }
-        });
-}
-
-

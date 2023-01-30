@@ -1,0 +1,7 @@
+/* .hide {
+    display: none !important;  /* if there are 2 competing, this will take precedence 
+} */
+
+.hide {
+    display: none ;  
+}
