@@ -16,12 +16,11 @@ let displayForecastEl = $('#display-forecast');
 let forecastCardEl = $(".forecast-card");
 
 
-
 // To save the user's inputed city name for the currentWeather fetch
 $("#city-form").on("submit", function (event) {   //id from form html
     event.preventDefault();
 
-    // get name of city searched
+    //Grab the name of city searched
     cityInputEl = $("#city-input").val(); //id from label html
     console.log(cityInputEl);  //checking to see if it is taking in data from the form
 
@@ -31,7 +30,7 @@ $("#city-form").on("submit", function (event) {   //id from form html
         event.preventDefault();
     }
     else {
-        currentWeather(cityInputEl);  //this fetch is working
+        currentWeather(cityInputEl);  
     }
 });
 
@@ -67,13 +66,13 @@ function currentWeather() {
             let today = dayjs();
             $('#date').text(today.format('MMM D, YYYY'));
 
-            // To get the Icon of the weather on the page
+            //To get the Icon of the weather on the page
             let iconImg = $("<img>");
             iconImg.addClass("img-fluid");
             iconImg.attr("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png")
             $("#city").append(iconImg);
 
-            //to outpout the temp, humidity & wind to the page
+            //To outpout the temp, humidity & wind to the page
             document.getElementById("temp").innerHTML = "Temp: " + temp + " °С";
             document.getElementById("wind").innerHTML = "Wind: " + windKM + " km/hr";
             document.getElementById("humidity").innerHTML = "Humidity: " + humidity + "%";
@@ -87,10 +86,7 @@ function currentWeather() {
 //Function for the 5 day forecast, creates cards to append to the page
 function fiveDayForecast() {
 
-
     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
-
-
 
     fetch(forecastURL)
         .then(function (response) {
@@ -98,7 +94,7 @@ function fiveDayForecast() {
         })
         .then(function (response) {
         
-
+            //Loop to pull the 5 day forecast from the forecast fetch
             for (var i = 6; i < response.list.length; i += 8) {
                 //Declaring and initiliazing the variables values from the above json response
                 foreIcon = response.list[i].weather[0].icon;
@@ -107,7 +103,8 @@ function fiveDayForecast() {
                 foreHumidity = response.list[i].main.humidity;
                 foreWind = response.list[i].wind.speed;
                 forewindKM = Math.floor((foreWind) * 3.6);
-                //To confirm that the right information has been logged
+
+                //To confirm that the right information has been logged from the variable
                 console.log('for loop responses')
                 console.log(response.list[i].dt_txt);
                 console.log("icon", foreIconURL);
@@ -116,35 +113,32 @@ function fiveDayForecast() {
                 console.log("wind", foreWind);
                 console.log("wind km", forewindKM);
 
-
-                let fiveDay = $("<div class='card text-white bg-primary p-2'>")
+                //To create elements for the 5day forecast cards
+                let fiveDay = $("<div class='card text-white bg-primary'>")
                 let fiveTemp = $("<p>");
                 let fiveHum = $("<p>");
                 let fiveForeWind = $("<p>");
                 let fiveImg = $("<img>");
                 let fiveDate = $("<h6>");  
+
+                //To output the variables obtained from the loop into each dynamically created card
                 fiveTemp.text("Temp: " + foreTemp + " °С")
                 fiveHum.text("Humidity: " + foreHumidity + "%")
                 fiveForeWind.text("Wind Speed: " + forewindKM + " km/hr");
                 fiveDate.text("Date: " + response.list[i].dt_txt)
                 let today = dayjs();
                 $('#date').text(today.format('MMM D, YYYY'));
-
                 fiveImg.addClass("img-fluid");
                 fiveImg.attr("src", "https://openweathermap.org/img/wn/" + foreIcon + "@2x.png")
 
+                //Appending the above output to HTML under section id=display-forecast
                 fiveDay.append(fiveDate);
                 fiveDay.append(fiveImg);
                 fiveDay.append(fiveTemp);
                 fiveDay.append(fiveForeWind);
                 fiveDay.append(fiveHum);
-                forecastCardEl.append(fiveDay);
-
-
-
-                // fiveDay.append();
-
-                // testingFunction()
+                forecastCardEl.append(fiveDay);       
+          
             }
         });
 }
@@ -156,7 +150,7 @@ function fiveDayForecast() {
 
 
 
-//Function to get the 5 day forecast, using the lat & lon from the currentWeather function above
+//This is ny testing function for all the fetchs.  DO NOT DELETE UNTIL THE END
 // function testingFunction() {
 //     console.log(lat, lon);
 //     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
