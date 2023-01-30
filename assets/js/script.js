@@ -97,8 +97,7 @@ function fiveDayForecast() {
             return response.json();
         })
         .then(function (response) {
-            //trying to hide the display-forecast section HTML & have it reappear
-            // displayForecastEl.classList.remove("hide");
+        
 
             for (var i = 6; i < response.list.length; i += 8) {
                 //Declaring and initiliazing the variables values from the above json response
@@ -117,28 +116,31 @@ function fiveDayForecast() {
                 console.log("wind", foreWind);
                 console.log("wind km", forewindKM);
 
-                
+
                 let fiveDay = $("<div class='card text-white bg-primary p-2'>")
                 let fiveTemp = $("<p>");
                 let fiveHum = $("<p>");
+                let fiveForeWind = $("<p>");
                 let fiveImg = $("<img>");
-                let fiveDate = $("<h6>");  //need to do a dayjs for this
-                fiveTemp.text("Temp:"+foreTemp)
-                fiveHum.text("Humidity: "+foreHumidity)
-                fiveDate.text("Date: " +response.list[i].dt_txt)
+                let fiveDate = $("<h6>");  
+                fiveTemp.text("Temp: " + foreTemp + " °С")
+                fiveHum.text("Humidity: " + foreHumidity + "%")
+                fiveForeWind.text("Wind Speed: " + forewindKM + " km/hr");
+                fiveDate.text("Date: " + response.list[i].dt_txt)
                 let today = dayjs();
                 $('#date').text(today.format('MMM D, YYYY'));
 
                 fiveImg.addClass("img-fluid");
-                fiveImg.attr("src", "https://openweathermap.org/img/wn/" + foreIcon + ".png")
+                fiveImg.attr("src", "https://openweathermap.org/img/wn/" + foreIcon + "@2x.png")
 
                 fiveDay.append(fiveDate);
                 fiveDay.append(fiveImg);
-                fiveDay.append(fiveTemp)
+                fiveDay.append(fiveTemp);
+                fiveDay.append(fiveForeWind);
                 fiveDay.append(fiveHum);
                 forecastCardEl.append(fiveDay);
 
-                
+
 
                 // fiveDay.append();
 
