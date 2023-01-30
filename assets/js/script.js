@@ -153,19 +153,19 @@ function fiveDayForecast() {
 
 
 //Function to get the 5 day forecast, using the lat & lon from the currentWeather function above
-function testingFunction() {
-    console.log(lat, lon);
-    let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
-    fetch(forecastURL)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (response) {
-            console.log(response);
-            for (var i = 4; i < response.list.length; i += 8) {
-                console.log('hello')
-                console.log(response.list[i].dt_txt);
-            }
-        });
+// function testingFunction() {
+//     console.log(lat, lon);
+//     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
+//     fetch(forecastURL)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (response) {
+//             console.log(response);
+//             for (var i = 4; i < response.list.length; i += 8) {
+//                 console.log('hello')
+//                 console.log(response.list[i].dt_txt);
+//             }
+//         });
 
-}
+// }
