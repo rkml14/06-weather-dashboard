@@ -118,7 +118,7 @@ testingFunction();
                 return response.json();
             })
             .then(function (response) {
-                for (var i = 0; i < response.length; i += 8) {
+                for (var i = 4; i < response.length; i += 8) {
                     console.log(response.list.dt_text[i]);
                 }
             });
