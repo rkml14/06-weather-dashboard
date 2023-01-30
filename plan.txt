@@ -19,6 +19,9 @@ need to output the current weather with the following  - STILL NEED TO DO
     -the humidity
     -the wind speed
 
+I've pulled out the values so now I can put them out to the page 
+
+
 
 need to output the 5 day forecast with the following     - 5 days 5 cards?
     -the date    

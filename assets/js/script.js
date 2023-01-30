@@ -4,22 +4,21 @@
 let cityFormEl = $('#city-form');
 let cityInputEl = $('#city-input');
 
-const city = document.querySelector('city');
-const date = document.querySelector('date');
-const temp = document.querySelector('temp');
-const humidity = document.querySelector('humidity');
-const wind = document.querySelector('wind');
+// const city = document.querySelector('city');
+// const date = document.querySelector('date');
+// const temp = document.querySelector('temp');
+// const humidity = document.querySelector('humidity');
+// const wind = document.querySelector('wind');
 
 
 
 let apiKey = "304b8acf30a32bcf0df086074838b6ea";
 let lat;
 let lon;
-
-//for testing purposes 
-const testCity = "Toronto";
-const testCity2 = "Paris";
-let currentDay = ""
+let icon;
+let temp;
+let humidity;
+let wind;
 
 
 // To save the user's inputed city name for the currentWeather fetch
@@ -49,19 +48,54 @@ function currentWeather() {
         })
         .then(function (res) {
             console.log(res)
+
+            //Declaring the variables values from the above json response
             lat = res.coord.lat;
             lon = res.coord.lon;
-            console.log("lat", lat)
-            console.log("lon", lon)
-            fiveDayForecast();    
-            //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
-        })
+            icon = res.weather[0].icon;
+            iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
+            temp = res.main.temp;
+            humidity = res.main.humidity;
+            wind = res.wind.speed;
+            //To confirm that the right information has been logged
+            console.log("lat", lat);
+            console.log("lon", lon);
+            console.log("icon", iconURL);
+            console.log("temp", temp);
+            console.log("humidity", humidity);
+            console.log("wind", wind);
+            windKM = Math.floor((wind) * 3.6);
 
+            //To output the city name & time 
+            document.getElementById("city").innerHTML = cityInputEl;
+            let today = dayjs();
+            $('#date').text(today.format('MMM D, YYYY'));
+
+            // To get the Icon of the weather on the page
+            let iconImg = $("<img>");
+            iconImg.addClass("img-fluid");
+            iconImg.attr("src", "https://openweathermap.org/img/wn/" + icon + ".png")
+            $("#city").append(iconImg);
+
+            //to outpout the temp, humidity & wind to the page
+            document.getElementById("temp").innerHTML = "Temp: " + temp + " °С";
+            document.getElementById("wind").innerHTML = "Wind: " + windKM + " km/hr";
+            document.getElementById("humidity").innerHTML = "Humidity: " + humidity + "%";
+
+            //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
+            fiveDayForecast();
+        })
 };
+
+
+// h1El.setAttribute("style", "margin:auto; width:50%; text-align:center;");
+
+
+
 
 //Function to get the 5 day forecast, using the lat & lon from the currentWeather function above
 function fiveDayForecast() {
-    console.log(lat,lon);
+    console.log(lat, lon);
     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
     fetch(forecastURL)
         .then(function (response) {
@@ -70,4 +104,18 @@ function fiveDayForecast() {
         .then(function (response) {
             console.log(response);
         });
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
