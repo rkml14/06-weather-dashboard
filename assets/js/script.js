@@ -84,6 +84,7 @@ function currentWeather() {
 
             //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
             fiveDayForecast();
+           
         })
 };
 
@@ -103,15 +104,15 @@ function fiveDayForecast() {
         })
         .then(function (response) {
             console.log(response);
+            testingFunction();
         });
-testingFunction();
+
 }
 
 
 
 
     function testingFunction() {
-        console.log(lat, lon);
         let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
         fetch(forecastURL)
             .then(function (response) {
@@ -119,7 +120,7 @@ testingFunction();
             })
             .then(function (response) {
                 for (var i = 4; i < response.length; i += 8) {
-                    console.log(response.list.dt_text[i]);
+                    console.log(response.list[i].dt_txt);
                 }
             });
     }
