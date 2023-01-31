@@ -30,52 +30,54 @@
     <!--read up on cards in bootstrap.  may look nicer  -->
     <main class="flex-row justify-space-between">
 
-
-        <section class=".container-fluid">
-            <div class="row">
-                <section class="col-lg-3 p-3">
-                    <h4>Enter a City Name:</h4>
-                    <form class="card-body" id="city-form">
-                        <!-- <input class="form-control sm-2" id="city-input" type="search"> -->
-                        <input type="text" class="form-input" id="city-input" name="city-input" />
-                        <button class="btn btn-primary">SEARCH</button>
-                    </form>
-                </section>
-
-
-
-                <!-- Section to output for the current weather. Needs to not show at first. work on this -->
-                <section class="col-lg-9 p-3" id="current-weather">
-                    <div class="card" id="city-location-box">
-                        <h1 id="city"></h1>
-                        <h5 id="date"></h5>
-                        <p id="temp"></p>
-                        <p id="wind"></p>
-                        <p id="humidity"></p>
+        <section>
+            <div class=".container-fluid" id="input-city-name">
+                <div class="row">
+                    <div class="col-lg-3 p-3">
+                        <h4>Enter a City Name:</h4>
+                        <form class="card-body" id="city-form">
+                            <!-- <input class="form-control sm-2" id="city-input" type="search"> -->
+                            <input type="text" class="form-input" id="city-input" name="city-input" />
+                            <button class="btn btn-primary">SEARCH</button>
+                        </form>
                     </div>
+                </div>
+            </div>
+
+            <div id="city-searches">
+
             </div>
         </section>
 
-
-        <!-- Section for the 5 day forecast -->
-        <section class="col-lg-8">
-            <div class="row justify-content-evenly">
-                <section class="col-5" id="display-forecast">
-                    <h3>5-Day Forecast:</h3>
-                    <!-- Cards will be created via script.js dynamically -->
-                    <div class="forecast-card">
-                    </div>
-                </section>
+        <!-- Section to output for the current weather. Needs to not show at first. work on this -->
+        <section id="weather-cards">
+            <div class="col-lg-9 p-3" id="current-weather">
+                <div class="card" id="city-location-box">
+                    <h1 id="city"></h1>
+                    <h5 id="date"></h5>
+                    <p id="temp"></p>
+                    <p id="wind"></p>
+                    <p id="humidity"></p>
+                </div>
             </div>
+
+            <!-- Section for the 5 day forecast -->
+            <div class="col-lg-8" id="five-day-cards">
+                <div class="row justify-content-evenly">
+                    <div class="col-5" id="display-forecast">
+                        <h3>5-Day Forecast:</h3>
+                        <!-- Cards will be created via script.js dynamically -->
+                        <div class="forecast-card">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
-
-
-
-
-
-
     </main>
 
+
+    <!--All style sheets to be linked-->
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
         integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
 
