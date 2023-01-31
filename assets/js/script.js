@@ -31,7 +31,7 @@ $("#city-form").on("submit", function (event) {   //id from form html
         event.preventDefault();
     }
     else {
-        //Trying to clear the 5 day forecast for when a new city is inputed.  It keeps clearing it no matter where I put is
+        //Clears the forecast cards that are created in the child node of the fiveDayFunction
         $("#forecast-card").empty();
         currentWeather(cityInputEl);
     }
@@ -47,9 +47,6 @@ function currentWeather() {
         })
         .then(function (res) {
             console.log(res)
-
-
-
 
             //Declaring and initiliazing the variables values from the above json response
             lat = res.coord.lat;
@@ -85,7 +82,6 @@ function currentWeather() {
             document.getElementById("humidity").innerHTML = "Humidity: " + humidity + "%";
 
             //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
-
             fiveDayForecast();
 
         })
