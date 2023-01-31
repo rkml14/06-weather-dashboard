@@ -1,4 +1,4 @@
-# 06 SWeather Dashboard
+# 06 Weather Dashboard
 
 ## Your Task
 
@@ -23,17 +23,20 @@ The following image shows the web application's appearance and functionality:
 ![Weather Dashboard demonstrating functionality with the City of Toronto](assets/images/Weather%20Dashboard%20Screenshot.png)
 
 ## Things Learned
-- how to use API keys, and conduct several fetches in order to 
+- how to use API keys, and conduct several fetches in order to retrieve information
 
 
 ## Colabs
--Cassie Watson 
+
+Cassie Watson 
 
 
 ## Author
+
 Rebecca Lawrence  https://github.com/rkml14/06-weather-dashboard 
-image.png
-Live Site: 
+
+Live Site: https://rkml14.github.io/06-weather-dashboard/ 
+
 
 ## License
 MIT License

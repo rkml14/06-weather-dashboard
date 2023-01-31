@@ -1,18 +1,15 @@
-/* .hide {
-    display: none !important;  /* if there are 2 competing, this will take precedence 
-} */
-
 .hide {
     display: none ;  
 }
 
 
-/* trying to remove box pout around */
+/* Remove box around these */
 
 #current-weather, #city-location-box {
     border: 1px solid white;
 }
 
+/*add colour to header */ 
 #header-box {
     background-color: #0d6efd;
     color: black;

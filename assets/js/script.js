@@ -168,15 +168,15 @@ function loadPreviousCities() {
     let localStorageArray = JSON.parse(localStorage.getItem("cities"))
     console.log("this localstorage", localStorageArray);
 
-    for (let i = 0; i < localStorageArray.length; i++) { ///loop through our array of cities in here
-        let button = document.createElement("button"); //create a button with javascript for the city
-        let cityListEl = document.getElementById('city-1'); //set the inside of the button to be equal to the city name from the list
+    ///loop through the array of cities & create a buton via javascript for the city
+    for (let i = 0; i < localStorageArray.length; i++) { 
+        let button = document.createElement("button"); 
+
+        //set the inside of the button to be equal to the city name from the list
+        let cityListEl = document.getElementById('city-1'); 
         button.textContent = localStorageArray[i];
 
-        button[i].addEventListener("click", function () {
-            let data = buttons[i].dataset;
-            
-        })     /// add the onclick to button
+        /// add the onclick to button
         //append the new button created with the city name inside of it  
         cityListEl.appendChild(button);
         console.log(localStorageArray[i]);
@@ -206,7 +206,11 @@ loadPreviousCities();
 // let localStorageArray = JSON.parse(localStorage.getItem("cities"))
 // $("#city-1 button").val(localStorageArray[0])
 
+        // button[i].addEventListener("click", function () {
+        //     let data = buttons[i].dataset;
 
+        // })     
+        
 
 
 
