@@ -19,7 +19,7 @@ let forecastCardEl = $("#forecast-card");
 // To save the user's inputed city name for the currentWeather fetch
 $("#city-form").on("submit", function (event) {   //id from form html
     event.preventDefault();
-
+    
     //Grab the name of city searched
     cityInputEl = $("#city-input").val(); //id from label html
     console.log(cityInputEl);  //checking to see if it is taking in data from the form
@@ -46,7 +46,11 @@ function currentWeather() {
         })
         .then(function (res) {
             console.log(res)
-           
+
+            //Trying to clear the 5 day forecast for when a new city is inputed.  It keeps clearing it no matter where I put is
+            $("#display-forecast").empty();
+
+
             //Declaring and initiliazing the variables values from the above json response
             lat = res.coord.lat;
             lon = res.coord.lon;
@@ -81,8 +85,9 @@ function currentWeather() {
             document.getElementById("humidity").innerHTML = "Humidity: " + humidity + "%";
 
             //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
-           
+            
             fiveDayForecast();
+            
         })
 };
 
@@ -97,9 +102,9 @@ function fiveDayForecast() {
             return response.json();
         })
         .then(function (response) {
-
+            
             //Loop to pull the 5 day forecast from the forecast fetch
-            for (var i = 6; i < response.list.length; i += 8) {
+            for (var i = 0; i < response.list.length; i += 8) {
                 
                 //Declaring and initiliazing the variables values from the above json response
                 foreIcon = response.list[i].weather[0].icon;
