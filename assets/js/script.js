@@ -23,6 +23,7 @@ $("#city-form").on("submit", function (event) {   //id from form html
     //Grab the name of city searched
     cityInputEl = $("#city-input").val(); //id from label html
     console.log(cityInputEl);  //checking to see if it is taking in data from the form
+   
 
     if (cityInputEl === "" || cityInputEl == null) {  //prevent no data entry by user 
         //send alert if search input is empty when submitted
@@ -30,12 +31,14 @@ $("#city-form").on("submit", function (event) {   //id from form html
         event.preventDefault();
     }
     else {
+        
         currentWeather(cityInputEl);
     }
 });
 
 //Fetch is working for currentWeather to extract data for current day
 function currentWeather() {
+    
     let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&limit=1&units=metric&appid=" + apiKey;
     fetch(queryURL)
         .then(function (res) {
@@ -43,7 +46,7 @@ function currentWeather() {
         })
         .then(function (res) {
             console.log(res)
-
+           
             //Declaring and initiliazing the variables values from the above json response
             lat = res.coord.lat;
             lon = res.coord.lon;
@@ -78,6 +81,7 @@ function currentWeather() {
             document.getElementById("humidity").innerHTML = "Humidity: " + humidity + "%";
 
             //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
+           
             fiveDayForecast();
         })
 };
@@ -85,9 +89,9 @@ function currentWeather() {
 
 //Function for the 5 day forecast, creates cards to append to the page
 function fiveDayForecast() {
-
+   
     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
-
+   
     fetch(forecastURL)
         .then(function (response) {
             return response.json();
@@ -96,6 +100,7 @@ function fiveDayForecast() {
 
             //Loop to pull the 5 day forecast from the forecast fetch
             for (var i = 6; i < response.list.length; i += 8) {
+                
                 //Declaring and initiliazing the variables values from the above json response
                 foreIcon = response.list[i].weather[0].icon;
                 foreIconURL = "http://openweathermap.org/img/w/" + foreIcon + ".png";
