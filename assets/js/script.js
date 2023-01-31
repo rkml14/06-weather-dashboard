@@ -30,7 +30,7 @@ $("#city-form").on("submit", function (event) {   //id from form html
         event.preventDefault();
     }
     else {
-        currentWeather(cityInputEl);  
+        currentWeather(cityInputEl);
     }
 });
 
@@ -93,7 +93,7 @@ function fiveDayForecast() {
             return response.json();
         })
         .then(function (response) {
-        
+
             //Loop to pull the 5 day forecast from the forecast fetch
             for (var i = 6; i < response.list.length; i += 8) {
                 //Declaring and initiliazing the variables values from the above json response
@@ -119,7 +119,7 @@ function fiveDayForecast() {
                 let fiveHum = $("<p>");
                 let fiveForeWind = $("<p>");
                 let fiveImg = $("<img>");
-                let fiveDate = $("<h6>");  
+                let fiveDate = $("<h6>");
 
                 //To output the variables obtained from the loop into each dynamically created card
                 fiveTemp.text("Temp: " + foreTemp + " °С")
@@ -137,13 +137,24 @@ function fiveDayForecast() {
                 fiveDay.append(fiveTemp);
                 fiveDay.append(fiveForeWind);
                 fiveDay.append(fiveHum);
-                forecastCardEl.append(fiveDay);       
-          
+                forecastCardEl.append(fiveDay);
+
             }
         });
 }
 
 
+
+
+///Saving to local storage
+
+// $(“.save”).on(“click”, function () {
+//     //creating an array... to add inputValue in to save to local storage..
+//     let arrayOfCities = JSON.parse(localStorage.getItem(“cities”)) || []
+//     let inputValue = $(this).siblings(“input”).val();   // $(this) <== the button element clicked. // $(this).siblings(‘input’)  <== the input element in html
+//     arrayOfCities.push(inputValue)
+//     localStorage.setItem(“cities”, JSON.stringify(arrayOfCities))
+// });
 
 
 

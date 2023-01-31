@@ -5,3 +5,17 @@
 .hide {
     display: none ;  
 }
+
+
+/* trying to remove box pout around */
+
+#current-weather, #city-location-box {
+    border: 1px solid white;
+}
+
+#header-box {
+    background-color: #0d6efd;
+    color: black;
+    font-weight: 200;
+    padding: 1%;
+}
