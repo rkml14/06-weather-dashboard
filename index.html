@@ -28,12 +28,12 @@
 
 
     <!--read up on cards in bootstrap.  may look nicer  -->
-    <main class="flex-row justify-space-between">
+    <main class="container-fluid d-flex">
 
-        <section>
-            <div class=".container-fluid" id="input-city-name">
+        <section class="w-25">
+            <div id="input-city-name">
                 <div class="row">
-                    <div class="col-lg-3 p-3">
+                    <div class="">
                         <h4>Enter a City Name:</h4>
                         <form class="card-body" id="city-form">
                             <!-- <input class="form-control sm-2" id="city-input" type="search"> -->
@@ -50,8 +50,8 @@
         </section>
 
         <!-- Section to output for the current weather. Needs to not show at first. work on this -->
-        <section id="weather-cards">
-            <div class="col-lg-9 p-3" id="current-weather">
+        <section id="weather-cards" class="w-75">
+            <div class="p-3" id="current-weather">
                 <div class="card" id="city-location-box">
                     <h1 id="city"></h1>
                     <h5 id="date"></h5>
@@ -62,12 +62,12 @@
             </div>
 
             <!-- Section for the 5 day forecast -->
-            <div class="col-lg-8" id="five-day-cards">
-                <div class="row justify-content-evenly">
-                    <div class="col-5" id="display-forecast">
+            <div class="" id="five-day-cards">
+                <div class="row">
+                    <div class="" id="display-forecast">
                         <h3>5-Day Forecast:</h3>
                         <!-- Cards will be created via script.js dynamically -->
-                        <div class="forecast-card">
+                        <div id="forecast-card" class="d-flex justify-content-around">
                         </div>
                     </div>
                 </div>

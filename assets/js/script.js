@@ -13,7 +13,7 @@ let cityInputEl = $('#city-input');
 
 let cityForecastEl = $('#city-forecast');
 let displayForecastEl = $('#display-forecast');
-let forecastCardEl = $(".forecast-card");
+let forecastCardEl = $("#forecast-card");
 
 
 // To save the user's inputed city name for the currentWeather fetch
@@ -129,6 +129,7 @@ function fiveDayForecast() {
                 let today = dayjs();
                 $('#date').text(today.format('MMM D, YYYY'));
                 fiveImg.addClass("img-fluid");
+                fiveImg.addClass("w-25");
                 fiveImg.attr("src", "https://openweathermap.org/img/wn/" + foreIcon + "@2x.png")
 
                 //Appending the above output to HTML under section id=display-forecast
