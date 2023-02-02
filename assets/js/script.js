@@ -9,7 +9,6 @@ let wind;
 
 //From the HTML
 let cityFormEl = $('#city-form');
-let cityInputEl = $('#city-input');
 
 let cityForecastEl = $('#city-forecast');
 let displayForecastEl = $('#display-forecast');
@@ -21,11 +20,11 @@ $("#city-form").on("submit", function (event) {   //id from form html
     event.preventDefault();
 
     //Grab the name of city searched
-    cityInputEl = $("#city-input").val(); //id from label html
-    console.log(cityInputEl);  //checking to see if it is taking in data from the form
+    var cityName = $("#city-input").val(); //id from label html
+    console.log(cityName);  //checking to see if it is taking in data from the form
 
 
-    if (cityInputEl === "" || cityInputEl == null) {  //prevent no data entry by user 
+    if (cityName === "" || cityName == null) {  //prevent no data entry by user 
         //send alert if search input is empty when submitted
         alert("Please enter a city name");
         event.preventDefault();
@@ -33,14 +32,16 @@ $("#city-form").on("submit", function (event) {   //id from form html
     else {
         //Clears the forecast cards that are created in the child node of the fiveDayFunction
         $("#forecast-card").empty();
-        currentWeather(cityInputEl);
+        // $("#city-1").empty();
+        currentWeather(cityName);
+        showCities(cityName)
     }
 });
 
 //Fetch is working for currentWeather to extract data for current day
-function currentWeather() {
+function currentWeather(cityName) {
 
-    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&limit=1&units=metric&appid=" + apiKey;
+    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&limit=1&units=metric&appid=" + apiKey;
     fetch(queryURL)
         .then(function (res) {
             return res.json();
@@ -66,7 +67,7 @@ function currentWeather() {
             windKM = Math.floor((wind) * 3.6);
 
             //To output the city name & time 
-            document.getElementById("city").innerHTML = cityInputEl;
+            document.getElementById("city").innerHTML = cityName;
             let today = dayjs();
             $('#date').text(today.format('MMM D, YYYY'));
 
@@ -98,7 +99,7 @@ function fiveDayForecast() {
             return response.json();
         })
         .then(function (response) {
-
+            forecastCardEl.empty();
             //Loop to pull the 5 day forecast from the forecast fetch
             for (var i = 0; i < response.list.length; i += 8) {
 
@@ -131,9 +132,9 @@ function fiveDayForecast() {
                 fiveTemp.text("Temp: " + foreTemp + " °С")
                 fiveHum.text("Humidity: " + foreHumidity + "%")
                 fiveForeWind.text("Wind Speed: " + forewindKM + " km/hr");
-                fiveDate.text("Date: " + response.list[i].dt_txt)
-                let today = dayjs();
-                $('#date').text(today.format('MMM D, YYYY'));
+
+                let today = dayjs(response.list[i].dt_txt);
+                fiveDate.text(today.format('MMM D, YYYY'));
                 fiveImg.addClass("img-fluid");
                 fiveImg.addClass("w-25");
                 fiveImg.attr("src", "https://openweathermap.org/img/wn/" + foreIcon + "@2x.png")
@@ -151,14 +152,18 @@ function fiveDayForecast() {
 }
 
 ///Saving cities entered to local storage
-$(".btn").on("click", function () {
+function showCities (cityName) {
     //creating an array... to add inputValue in to save to local storage..
     let arrayOfCities = JSON.parse(localStorage.getItem("cities")) || []
     //the $(this) refers to the current element, aka the search button. then you find the sibling which includes the input tag, and get the value from it to get the value of the city entered
-    let inputValue = $(this).siblings("input").val();   // $(this) <== the button element clicked. // $(this).siblings('input')  <== the input element in html
-    arrayOfCities.push(inputValue)
-    localStorage.setItem("cities", JSON.stringify(arrayOfCities))
-});
+    // let inputValue = $(this).siblings("input").val();   // $(this) <== the button element clicked. // $(this).siblings('input')  <== the input element in html
+    if (cityName !== "" && !arrayOfCities.includes(cityName)){
+        arrayOfCities.push(cityName)
+        localStorage.setItem("cities", JSON.stringify(arrayOfCities))
+    }
+    
+    loadPreviousCities();
+};
 
 
 ///working on pulling cities from local storage
@@ -168,21 +173,19 @@ function loadPreviousCities() {
     let localStorageArray = JSON.parse(localStorage.getItem("cities"))
     console.log("this localstorage", localStorageArray);
 
+    var btnHTML = ""
     ///loop through the array of cities & create a buton via javascript for the city
     for (let i = 0; i < localStorageArray.length; i++) { 
-        let button = document.createElement("button"); 
+        var cityName = localStorageArray[i]
+        btnHTML += `<button class="btn btn-primary" onclick="currentWeather('${cityName}')">${cityName}</button>` //template literal
 
-        //set the inside of the button to be equal to the city name from the list
-        let cityListEl = document.getElementById('city-1'); 
-        button.textContent = localStorageArray[i];
+    } 
 
-        /// add the onclick to button
-        //append the new button created with the city name inside of it  
-        cityListEl.appendChild(button);
-        console.log(localStorageArray[i]);
-    }
+    $("#city-1").html(btnHTML)
 }
+
 loadPreviousCities();
+
 
 
 //saved bits of scrapped code
