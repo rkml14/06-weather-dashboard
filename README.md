@@ -9,21 +9,30 @@ input a city name and have the current weather displayed along with a 5 day fore
 
  The 5 day forecast displays the date, an icon representation of the weather conditions, the wind speed & humidity.  
 
-The city searched for is saved in the search history, and a button is created for the user to be able to click on again to view the current weather & future conditions.  
+The city searched for is saved in the search history, and a button is created for the user to be able to click on again to view the current weather & future conditions.  The User is prompted for an actual city name if they input a null value.  Neither null values or duplicate city names are saved to the search button history.  When a previously searched city button is clicked, the applicaiton repopulates the current weather & five day forecast for that city. 
 
-
- Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
 
 ## Installation 
 
 Access the application via https://rkml14.github.io/06-weather-dashboard/ 
 
 
-The following image shows the web application's appearance and functionality:
-![Weather Dashboard demonstrating functionality with the City of Toronto](assets/images/Weather%20Dashboard%20Screenshot.png)
+The following image shows the web application's appearance:
+
+![Weather Dashboard landing Screen](assets/images/Weather%20Dashboard%20Screenshot.png)
+
+
+
+An animation of how the user can interact with the site:
+
+![Weather Dashboard demonstrating a user's interaction](assets/images/Weather%20Dashboard%20Demonstration.gif)
+
 
 ## Things Learned
-- how to use API keys, and conduct several fetches in order to retrieve information
+- How to use API keys, and conduct several fetches to servier side APIS in order to retrieve information.  
+- How to locate key information from the JSON responses
+- Creation of buttons & HTML elements via javascript.  
+- Further use of the DayJS api
 
 
 ## Colabs
