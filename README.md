@@ -1,6 +1,6 @@
 # 06 Weather Dashboard
 
-## Your Task
+## Description
 
 Using the Third-Party API, OpenWeather Map, an application was created to allow the user to 
 input a city name and have the current weather displayed along with a 5 day forecast in metric values. 

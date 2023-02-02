@@ -9,7 +9,6 @@ let wind;
 
 //From the HTML
 let cityFormEl = $('#city-form');
-
 let cityForecastEl = $('#city-forecast');
 let displayForecastEl = $('#display-forecast');
 let forecastCardEl = $("#forecast-card");
@@ -20,11 +19,11 @@ $("#city-form").on("submit", function (event) {   //id from form html
     event.preventDefault();
 
     //Grab the name of city searched
-    var cityName = $("#city-input").val(); //id from label html
+    var cityName = $("#city-input").val(); 
     console.log(cityName);  //checking to see if it is taking in data from the form
 
-
-    if (cityName === "" || cityName == null) {  //prevent no data entry by user 
+//Alerts the user if they have not entered in a city name 
+    if (cityName === "" || cityName == null) {  
         //send alert if search input is empty when submitted
         alert("Please enter a city name");
         event.preventDefault();
@@ -32,8 +31,11 @@ $("#city-form").on("submit", function (event) {   //id from form html
     else {
         //Clears the forecast cards that are created in the child node of the fiveDayFunction
         $("#forecast-card").empty();
-        // $("#city-1").empty();
+
+        //Calls the currentWeather function 
         currentWeather(cityName);
+
+        //Calls the buttons for previously searched cities 
         showCities(cityName)
     }
 });
@@ -57,6 +59,7 @@ function currentWeather(cityName) {
             temp = Math.floor(res.main.temp);
             humidity = res.main.humidity;
             wind = res.wind.speed;
+
             //To confirm that the right information has been logged
             console.log("lat", lat);
             console.log("lon", lon);
@@ -84,7 +87,6 @@ function currentWeather(cityName) {
 
             //fiveDayForecast needs to be inside the currentWeather function as it was running before the latter and not bringing over the lat & lon variables
             fiveDayForecast();
-
         })
 };
 
@@ -152,86 +154,40 @@ function fiveDayForecast() {
 }
 
 ///Saving cities entered to local storage
-function showCities (cityName) {
-    //creating an array... to add inputValue in to save to local storage..
+function showCities(cityName) {
+
     let arrayOfCities = JSON.parse(localStorage.getItem("cities")) || []
-    //the $(this) refers to the current element, aka the search button. then you find the sibling which includes the input tag, and get the value from it to get the value of the city entered
-    // let inputValue = $(this).siblings("input").val();   // $(this) <== the button element clicked. // $(this).siblings('input')  <== the input element in html
-    if (cityName !== "" && !arrayOfCities.includes(cityName)){
+
+    // Preventing duplication of City names or Null values from being entered into the array
+    if (cityName !== "" && !arrayOfCities.includes(cityName)) {
         arrayOfCities.push(cityName)
         localStorage.setItem("cities", JSON.stringify(arrayOfCities))
     }
-    
+
+    //Passing the function 
     loadPreviousCities();
 };
 
 
-///working on pulling cities from local storage
+///Pulls previously entered cities from local storage and creates a button for them
+
 function loadPreviousCities() {
     let cityOneValue = localStorage.getItem("cities") /// retrieve array from the local storage
     console.log(cityOneValue);
     let localStorageArray = JSON.parse(localStorage.getItem("cities"))
     console.log("this localstorage", localStorageArray);
-
     var btnHTML = ""
+
     ///loop through the array of cities & create a buton via javascript for the city
-    for (let i = 0; i < localStorageArray.length; i++) { 
+    for (let i = 0; i < localStorageArray.length; i++) {
         var cityName = localStorageArray[i]
-        btnHTML += `<button class="btn btn-primary" onclick="currentWeather('${cityName}')">${cityName}</button>` //template literal
+        btnHTML += `<button class="btn btn-primary " onclick="currentWeather('${cityName}')">${cityName}</button>` //template literal
 
-    } 
-
+    }
+    //Adds the button to the page in the city-1 section of the page 
     $("#city-1").html(btnHTML)
 }
 
 loadPreviousCities();
 
 
-
-//saved bits of scrapped code
-
-
-// $(“.save”).on(“click”, function () {
-//     //creating an array... to add inputValue in to save to local storage..
-//     let arrayOfCities = JSON.parse(localStorage.getItem(“cities”)) || []
-//     let inputValue = $(this).siblings(“input”).val();   // $(this) <== the button element clicked. // $(this).siblings(‘input’)  <== the input element in html
-//     arrayOfCities.push(inputValue)
-//     localStorage.setItem(“cities”, JSON.stringify(arrayOfCities))
-// });
-
-// let cityOneValue= localStorage.getItem("cities") /// retrieve array from the local storage
-// let localStorageArray = JSON.parse(localStorage.getItem("cities"))
-// cities = JSON.parse(cityOneValue); /// parse the arrray from the string
-
-// $("#city-1 button").val(cityOneValue)
-// console.log(cityOneValue);
-
-// let localStorageArray = JSON.parse(localStorage.getItem("cities"))
-// $("#city-1 button").val(localStorageArray[0])
-
-        // button[i].addEventListener("click", function () {
-        //     let data = buttons[i].dataset;
-
-        // })     
-        
-
-
-
-
-//This is ny testing function for all the fetchs.  DO NOT DELETE UNTIL THE END
-// function testingFunction() {
-//     console.log(lat, lon);
-//     let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&limit=1&units=metric&appid=" + apiKey;
-//     fetch(forecastURL)
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (response) {
-//             console.log(response);
-//             for (var i = 4; i < response.list.length; i += 8) {
-//                 console.log('hello')
-//                 console.log(response.list[i].dt_txt);
-//             }
-//         });
-
-// }
